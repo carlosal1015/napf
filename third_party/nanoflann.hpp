@@ -49,6 +49,7 @@
 #include <atomic>
 #include <cassert>
 #include <cmath>  // for abs()
+#include <cstdint> // std::uint32_t
 #include <cstdlib>  // for abs()
 #include <functional>  // std::reference_wrapper
 #include <future>
@@ -381,7 +382,7 @@ struct Metric
  */
 template <
     class T, class DataSource, typename _DistanceType = T,
-    typename IndexType = uint32_t>
+    typename IndexType = std::uint32_t>
 struct L1_Adaptor
 {
     using ElementType  = T;
@@ -443,7 +444,7 @@ struct L1_Adaptor
  */
 template <
     class T, class DataSource, typename _DistanceType = T,
-    typename IndexType = uint32_t>
+    typename IndexType = std::uint32_t>
 struct L2_Adaptor
 {
     using ElementType  = T;
@@ -508,7 +509,7 @@ struct L2_Adaptor
  */
 template <
     class T, class DataSource, typename _DistanceType = T,
-    typename IndexType = uint32_t>
+    typename IndexType = std::uint32_t>
 struct L2_Simple_Adaptor
 {
     using ElementType  = T;
@@ -553,7 +554,7 @@ struct L2_Simple_Adaptor
  */
 template <
     class T, class DataSource, typename _DistanceType = T,
-    typename IndexType = uint32_t>
+    typename IndexType = std::uint32_t>
 struct SO2_Adaptor
 {
     using ElementType  = T;
@@ -598,7 +599,7 @@ struct SO2_Adaptor
  */
 template <
     class T, class DataSource, typename _DistanceType = T,
-    typename IndexType = uint32_t>
+    typename IndexType = std::uint32_t>
 struct SO3_Adaptor
 {
     using ElementType  = T;
@@ -628,7 +629,7 @@ struct SO3_Adaptor
 /** Metaprogramming helper traits class for the L1 (Manhattan) metric */
 struct metric_L1 : public Metric
 {
-    template <class T, class DataSource, typename IndexType = uint32_t>
+    template <class T, class DataSource, typename IndexType = std::uint32_t>
     struct traits
     {
         using distance_t = L1_Adaptor<T, DataSource, T, IndexType>;
@@ -638,7 +639,7 @@ struct metric_L1 : public Metric
  * distance metric */
 struct metric_L2 : public Metric
 {
-    template <class T, class DataSource, typename IndexType = uint32_t>
+    template <class T, class DataSource, typename IndexType = std::uint32_t>
     struct traits
     {
         using distance_t = L2_Adaptor<T, DataSource, T, IndexType>;
@@ -648,7 +649,7 @@ struct metric_L2 : public Metric
  * **squared** distance metric */
 struct metric_L2_Simple : public Metric
 {
-    template <class T, class DataSource, typename IndexType = uint32_t>
+    template <class T, class DataSource, typename IndexType = std::uint32_t>
     struct traits
     {
         using distance_t = L2_Simple_Adaptor<T, DataSource, T, IndexType>;
@@ -657,7 +658,7 @@ struct metric_L2_Simple : public Metric
 /** Metaprogramming helper traits class for the SO3_InnerProdQuat metric */
 struct metric_SO2 : public Metric
 {
-    template <class T, class DataSource, typename IndexType = uint32_t>
+    template <class T, class DataSource, typename IndexType = std::uint32_t>
     struct traits
     {
         using distance_t = SO2_Adaptor<T, DataSource, T, IndexType>;
@@ -666,7 +667,7 @@ struct metric_SO2 : public Metric
 /** Metaprogramming helper traits class for the SO3_InnerProdQuat metric */
 struct metric_SO3 : public Metric
 {
-    template <class T, class DataSource, typename IndexType = uint32_t>
+    template <class T, class DataSource, typename IndexType = std::uint32_t>
     struct traits
     {
         using distance_t = SO3_Adaptor<T, DataSource, T, IndexType>;
@@ -753,8 +754,8 @@ class PooledAllocator
     /* Minimum number of bytes requested at a time from	the system.  Must be
      * multiple of WORDSIZE. */
 
-    using Offset    = uint32_t;
-    using Size      = uint32_t;
+    using Offset    = std::uint32_t;
+    using Size      = std::uint32_t;
     using Dimension = int32_t;
 
     Size  remaining_ = 0;  //!< Number of bytes left in current block of storage
@@ -901,7 +902,7 @@ struct array_or_vector<-1, T>
  */
 template <
     class Derived, typename Distance, class DatasetAdaptor, int32_t DIM = -1,
-    typename IndexType = uint32_t>
+    typename IndexType = std::uint32_t>
 class KDTreeBaseClass
 {
    public:
@@ -1426,7 +1427,7 @@ class KDTreeBaseClass
  */
 template <
     typename Distance, class DatasetAdaptor, int32_t DIM = -1,
-    typename IndexType = uint32_t>
+    typename IndexType = std::uint32_t>
 class KDTreeSingleIndexAdaptor
     : public KDTreeBaseClass<
           KDTreeSingleIndexAdaptor<Distance, DatasetAdaptor, DIM, IndexType>,
@@ -1869,7 +1870,7 @@ class KDTreeSingleIndexAdaptor
  */
 template <
     typename Distance, class DatasetAdaptor, int32_t DIM = -1,
-    typename IndexType = uint32_t>
+    typename IndexType = std::uint32_t>
 class KDTreeSingleIndexDynamicAdaptor_
     : public KDTreeBaseClass<
           KDTreeSingleIndexDynamicAdaptor_<
@@ -2259,7 +2260,7 @@ class KDTreeSingleIndexDynamicAdaptor_
  */
 template <
     typename Distance, class DatasetAdaptor, int32_t DIM = -1,
-    typename IndexType = uint32_t>
+    typename IndexType = std::uint32_t>
 class KDTreeSingleIndexDynamicAdaptor
 {
    public:
